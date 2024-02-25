@@ -4,11 +4,8 @@ from .models import Feature
 
 # Create your views here.
 def index(request):
-    feature1 = Feature()
-    feature1.id = 0
-    feature1.name = 'Machine Learning Engginer'
-    feature1.details = 'Deep Learning - Cloud Computing - Database management'
-    return render(request, 'index.html', {'feature': feature1})
+    features = Feature.objects.all()
+    return render(request, 'index.html', {'feature': features})
 
 def counter(request):
     text = request.POST.get('text')
