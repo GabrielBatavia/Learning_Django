@@ -32,7 +32,28 @@ def register(request):
             return redirect('register')
     else:
         return render(request, 'register.html')
-           
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+    
+        user = auth.authenticate(username=username, password=password) #Mengecek apakah usernam dan password sama seperti di database
+        
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Your Username or password is incorrect')
+            return redirect('login')
+    else:
+        return render(request, 'login.html')
+    
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
 
 def counter(request):
     text = request.POST.get('text')

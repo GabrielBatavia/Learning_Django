@@ -9,7 +9,7 @@
         <meta name="author" content="" />
         <title>Freelancer - Start Bootstrap Theme</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <portofolio rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
         <!-- Font Awesome icons (free version)-->
         <script src="{% static 'https://use.fontawesome.com/releases/v6.3.0/js/all.js' %}" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -29,6 +29,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="logout">Logout</a></li>
+                        {% else %}
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="login">Login</a></li>
+                        {% endif %}
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a></li>
@@ -42,7 +47,11 @@
                 <!-- Masthead Avatar Image-->
                 <img class="masthead-avatar mb-5" src="{% static 'assets/img/avataaars.svg' %}" alt="..." />
                 <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">{{feature.name}}</h1>
+                {% if user.is_authenticated %}
+                <h1 class="masthead-heading text-uppercase mb-0">Welcome {{user.username}}</h1>
+                {% else %}
+                <h1 class="masthead-heading text-uppercase mb-0">Welcome In Our Website</h1>
+                {% endif %}
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
